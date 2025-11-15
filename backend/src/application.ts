@@ -27,7 +27,10 @@ export class PruebatecnicaApplication extends BootMixin(
       rest: {
         ...options.rest,
         cors: {
-          origin: allowedOrigins,
+          origin: [
+            'http://localhost:8080',
+            'https://pruebatecnica-backend-afl6.onrender.com', // Tu URL de frontend
+          ],
           methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
           allowedHeaders: ['Content-Type', 'Authorization'],
           credentials: true,
