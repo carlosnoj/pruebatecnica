@@ -30,5 +30,3 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: VUE_APP_API_URL
-        value: https://pruebatecnica-backend-afl6.onrender.com
