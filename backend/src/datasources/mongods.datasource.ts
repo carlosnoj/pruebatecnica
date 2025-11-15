@@ -5,10 +5,37 @@ import {juggler} from '@loopback/repository';
 const mongoUrl =
   process.env.MONGO_URL || 'mongodb://localhost:27017/pruebatecnicadb';
 
+// Validar y corregir formato de URL si es necesario
+let finalMongoUrl = mongoUrl;
+
+// Si la URL usa mongodb:// pero parece ser MongoDB Atlas, advertir
+if (
+  finalMongoUrl.startsWith('mongodb://') &&
+  finalMongoUrl.includes('mongodb.net')
+) {
+  console.warn(
+    '⚠️  ADVERTENCIA: Parece que estás usando MongoDB Atlas pero con formato mongodb://',
+  );
+  console.warn('   Deberías usar mongodb+srv:// en lugar de mongodb://');
+  console.warn('   URL actual:', finalMongoUrl.replace(/:[^:@]+@/, ':****@'));
+}
+
+// Log de la URL (sin mostrar contraseña) solo en desarrollo
+if (process.env.NODE_ENV !== 'production') {
+  const maskedUrl = finalMongoUrl.replace(/:[^:@]+@/, ':****@');
+  console.log('📊 MongoDB URL:', maskedUrl);
+  console.log(
+    '📊 Formato:',
+    finalMongoUrl.startsWith('mongodb+srv://')
+      ? '✅ mongodb+srv://'
+      : '⚠️  mongodb://',
+  );
+}
+
 const config = {
   name: 'mongods',
   connector: 'mongodb',
-  url: mongoUrl,
+  url: finalMongoUrl,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };

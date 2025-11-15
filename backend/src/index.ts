@@ -1,5 +1,9 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
+// Solo cargar dotenv en desarrollo (cuando existe el archivo .env)
+// En producción, las variables vienen directamente del entorno
+if (process.env.NODE_ENV !== 'production') {
+  const dotenv = require('dotenv');
+  dotenv.config();
+}
 
 import {ApplicationConfig, PruebatecnicaApplication} from './application';
 
