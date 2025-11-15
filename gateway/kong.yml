@@ -1,0 +1,27 @@
+_format_version: "3.0"
+
+services:
+  - name: backend-service
+    url: http://backend:3000
+    routes:
+      - name: backend-route
+        paths:
+          - /api
+        strip_path: false
+
+plugins:
+  - name: cors
+    service: backend-service
+    config:
+      origins: ["*"]
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+      headers: ["*"]
+      exposed_headers: ["*"]
+      credentials: true
+      max_age: 3600
+
+  - name: rate-limiting
+    service: backend-service
+    config:
+      minute: 100
+      policy: local
