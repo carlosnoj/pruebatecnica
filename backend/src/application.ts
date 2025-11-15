@@ -29,7 +29,7 @@ export class PruebatecnicaApplication extends BootMixin(
         cors: {
           origin: [
             'http://localhost:8080',
-            'https://pruebatecnica-backend-afl6.onrender.com', // Tu URL de frontend
+            'https://pruebatecnica-frontend-ulco.onrender.com', // Tu URL de frontend
           ],
           methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
           allowedHeaders: ['Content-Type', 'Authorization'],
