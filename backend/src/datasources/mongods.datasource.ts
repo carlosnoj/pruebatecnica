@@ -5,6 +5,11 @@ import {juggler} from '@loopback/repository';
 const mongoUrl =
   process.env.MONGO_URL || 'mongodb://localhost:27017/pruebatecnicadb';
 
+// Log para debugging (mostrar URL sin contraseña)
+const maskedUrl = mongoUrl.replace(/:[^:@]+@/, ':****@');
+console.log('🔍 MONGO_URL detectada:', maskedUrl);
+console.log('🔍 Formato:', mongoUrl.startsWith('mongodb+srv://') ? '✅ mongodb+srv://' : '⚠️  mongodb://');
+
 // Validar y corregir formato de URL si es necesario
 let finalMongoUrl = mongoUrl;
 
