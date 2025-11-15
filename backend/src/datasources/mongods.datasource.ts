@@ -1,30 +1,17 @@
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
 
-// Si hay MONGO_URL en las variables de entorno, úsala directamente
-// Si no, usa la configuración por defecto (localhost)
-const mongoUrl = process.env.MONGO_URL;
+// Usa MONGO_URL si está disponible, sino usa localhost por defecto
+const mongoUrl =
+  process.env.MONGO_URL || 'mongodb://localhost:27017/pruebatecnicadb';
 
-const config = mongoUrl
-  ? {
-      name: 'mongods',
-      connector: 'mongodb',
-      url: mongoUrl,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  : {
-      name: 'mongods',
-      connector: 'mongodb',
-      url: '',
-      host: process.env.MONGO_HOST || 'localhost',
-      port: parseInt(process.env.MONGO_PORT || '27017', 10),
-      user: process.env.MONGO_USER || '',
-      password: process.env.MONGO_PASSWORD || '',
-      database: process.env.MONGO_DATABASE || 'pruebatecnicadb',
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    };
+const config = {
+  name: 'mongods',
+  connector: 'mongodb',
+  url: mongoUrl,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
 
 // Observe application's life cycle to disconnect the datasource when
 // application is stopped. This allows the application to be shut down
