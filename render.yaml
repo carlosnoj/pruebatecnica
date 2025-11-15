@@ -1,15 +1,34 @@
 services:
+  # ============================
+  # BACKEND
+  # ============================
   - type: web
     name: pruebatecnica-backend
     env: node
-    buildCommand: cd backend && npm install --include=dev && npm run build
-    startCommand: cd backend && npm start
+    rootDir: backend
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 3000
       - key: MONGO_URL
-        sync: false # Lo configurarás manualmente
+        sync: false # Lo configuras manualmente en Render
       - key: JWT_SECRET
-        sync: false # Lo configurarás manualmente
+        sync: false # También lo configuras en el panel
+
+  # ============================
+  # FRONTEND
+  # ============================
+  - type: web
+    name: pruebatecnica-frontend
+    env: node
+    rootDir: frontend/catalogo-app
+    buildCommand: npm install && npm run build
+    startCommand: npm run serve
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: VUE_APP_API_URL
+        value: https://pruebatecnica-backend-afl6.onrender.com
