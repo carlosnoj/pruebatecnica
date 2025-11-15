@@ -24,7 +24,7 @@ services:
   - type: web
     name: pruebatecnica-frontend
     env: node
-    rootDir: frontend/catalogo-app
+    rootDir: frontend
     buildCommand: npm install && npm run build
     startCommand: npx serve -s dist
     envVars:
