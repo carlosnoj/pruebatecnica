@@ -20,7 +20,7 @@ export class JWTStrategy implements AuthenticationStrategy {
 
     // ⚠️ IMPORTANTE: construir UserProfile con securityId obligatorio
     const userProfile: UserProfile = {
-      [securityId]: decoded.id_usuario, // 🔥 requerido
+      [securityId]: decoded.id_usuario,
       id: decoded.id_usuario,
       name: decoded.usuario,
       rol: decoded.rol,
