@@ -1,5 +1,6 @@
 import {BindingKey} from '@loopback/core';
-import {TokenService} from '@loopback/authentication-jwt';
+import {TokenService} from '@loopback/authentication';
+// Use '@loopback/authentication' for TokenService as it's not exported from '@loopback/authentication-jwt'
 
 export namespace TokenServiceConstants {
   export const TOKEN_SECRET_VALUE = process.env.JWT_SECRET ?? 'supersecretkey';
