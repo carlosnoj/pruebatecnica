@@ -37,9 +37,13 @@ export class ProductosController {
   private getUserIdFromToken(currentUser?: UserProfile): string | null {
     // Si tenemos el usuario del contexto de seguridad, usarlo
     if (currentUser) {
-      return currentUser.id || (currentUser as {id_usuario?: string}).id_usuario || null;
+      return (
+        currentUser.id ||
+        (currentUser as {id_usuario?: string}).id_usuario ||
+        null
+      );
     }
-    
+
     // Fallback: intentar obtener del header (para compatibilidad y tests unitarios)
     try {
       const authHeader = this.request.headers.authorization;
@@ -47,13 +51,13 @@ export class ProductosController {
 
       const token = authHeader.split(' ')[1];
       if (!token) return null;
-      
+
       // Intentar decodificar el token (para tests unitarios que usan JWT real)
       const decoded = jwt.decode(token);
       if (decoded && typeof decoded === 'object' && 'id_usuario' in decoded) {
         return (decoded as {id_usuario: string}).id_usuario;
       }
-      
+
       return null;
     } catch (err) {
       console.error('Error al obtener token:', err);
@@ -73,12 +77,12 @@ export class ProductosController {
         'application/json': {
           schema: getModelSchemaRef(Producto, {
             title: 'NewProducto',
-            exclude: ['id_producto', 'f_creacion'], //, 'id_usuario'
+            exclude: ['id_producto', 'f_creacion'],
           }),
         },
       },
     })
-    producto: Omit<Producto, 'id_producto' | 'f_creacion'>, //| 'id_usuario'
+    producto: Omit<Producto, 'id_producto' | 'f_creacion'>,
     @inject(SecurityBindings.USER, {optional: true})
     currentUser?: UserProfile,
   ): Promise<Producto> {
@@ -128,7 +132,7 @@ export class ProductosController {
       throw new HttpErrors.Unauthorized('No hay usuario autenticado');
     }
     const where = {
-      ...(filter?.where || {}),
+      ...(filter?.where ?? {}),
       id_usuario: userId,
     };
 

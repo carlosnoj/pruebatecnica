@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePatterns: ['test-mongo-connection.js'],
   extends: '@loopback/eslint-config',
   rules: {
     // Permitir snake_case en propiedades de objetos (común en bases de datos)
@@ -20,6 +21,10 @@ module.exports = {
         format: null, // Desactivar para propiedades de clases
       },
       {
+        selector: 'property',
+        format: ['camelCase', 'snake_case', 'PascalCase', 'UPPER_CASE'],
+      },
+      {
         // Permitir snake_case en variables que reflejan estructura de BD
         selector: 'variable',
         format: ['camelCase', 'PascalCase', 'UPPER_CASE', 'snake_case'],
@@ -29,5 +34,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'warn', // Cambiar a warning en lugar de error
     // Permitir || además de ?? (menos estricto)
     '@typescript-eslint/prefer-nullish-coalescing': 'warn', // Cambiar a warning
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   },
 };

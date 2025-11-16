@@ -42,10 +42,10 @@ export class LoginController {
       password: string;
     },
   ) {
-    const identifier = creds.correo || creds.usuario;
+    const identifier = creds.correo;
     console.log('creds: ' + creds);
     console.log('correo ' + creds.correo);
-    console.log('usuario ' + creds.usuario);
+    //console.log('usuario ' + creds.usuario);
     if (!identifier) {
       console.log('error al identificar el usuario ' + identifier?.toString);
       throw new HttpErrors.BadRequest('Debe enviar usuario o correo');

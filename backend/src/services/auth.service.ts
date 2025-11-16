@@ -13,7 +13,7 @@ const jwtVerify = promisify(jwt.verify);
 
 @injectable({scope: BindingScope.TRANSIENT})
 export class AuthService {
-  private jwtSecret: string = process.env.JWT_SECRET || 'supersecretkey';
+  private jwtSecret: string = process.env.JWT_SECRET ?? 'supersecretkey';
   private jwtExpiresIn: string | number = '8h';
 
   constructor(
@@ -26,7 +26,7 @@ export class AuthService {
   async login(identifier: string, password: string) {
     const usuario = await this.usuarioRepository.findOne({
       where: {
-        or: [{correo: identifier}, {usuario: identifier}],
+        or: [{correo: identifier}],
       },
     });
 
@@ -84,7 +84,7 @@ export class AuthService {
 
     return new Promise((resolve, reject) => {
       jwt.sign(payload, this.jwtSecret, signOptions, (err, token) => {
-        if (err || !token) return reject(err);
+        if (err ?? !token) return reject(err);
         resolve(token);
       });
     });

@@ -19,9 +19,10 @@ export class PruebatecnicaApplication extends BootMixin(
 ) {
   constructor(options: ApplicationConfig = {}) {
     // Configurar CORS: permite localhost para desarrollo y el dominio de producción
-    const allowedOrigins = process.env.ALLOWED_ORIGINS
-      ? process.env.ALLOWED_ORIGINS.split(',')
-      : ['http://localhost:8080', 'http://localhost:8081'];
+    // const allowedOrigins = process.env.ALLOWED_ORIGINS
+    //   ? process.env.ALLOWED_ORIGINS.split(',')
+    //   : ['http://localhost:8080', 'http://localhost:8081'];
+    const {JWTStrategy} = require('./authentication-strategies/jwt-strategy');
 
     options = {
       rest: {

@@ -3,7 +3,7 @@ import {juggler} from '@loopback/repository';
 
 // Usa MONGO_URL si está disponible, sino usa localhost por defecto
 const mongoUrl =
-  process.env.MONGO_URL || 'mongodb://localhost:27017/pruebatecnicadb';
+  process.env.MONGO_URL ?? 'mongodb://localhost:27017/pruebatecnicadb';
 
 // Log para debugging (mostrar URL sin contraseña)
 const maskedUrl = mongoUrl.replace(/:[^:@]+@/, ':****@');
@@ -16,7 +16,7 @@ console.log(
 );
 
 // Validar y corregir formato de URL si es necesario
-let finalMongoUrl = mongoUrl;
+const finalMongoUrl = mongoUrl;
 
 // Si la URL usa mongodb:// pero parece ser MongoDB Atlas, advertir
 if (
@@ -32,8 +32,8 @@ if (
 
 // Log de la URL (sin mostrar contraseña) solo en desarrollo
 if (process.env.NODE_ENV !== 'production') {
-  const maskedUrl = finalMongoUrl.replace(/:[^:@]+@/, ':****@');
-  console.log('📊 MongoDB URL:', maskedUrl);
+  const maskedUrl2 = finalMongoUrl.replace(/:[^:@]+@/, ':****@');
+  console.log('📊 MongoDB URL:', maskedUrl2);
   console.log(
     '📊 Formato:',
     finalMongoUrl.startsWith('mongodb+srv://')
