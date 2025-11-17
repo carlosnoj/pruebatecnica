@@ -3,7 +3,7 @@
 Este proyecto consiste en una aplicación full-stack con:
 *  Backend: LoopBack 4 + MongoDB Atlas
 *  Frontend: Vue.js + Vuetify
-*  Gateway/Proxy: Node.js (opcional)
+*  Gateway/Proxy: Node.js
 *  MongoDB: MongoDB Atlas o contenedor local
 *  Docker: ejecución local con docker-compose
 
