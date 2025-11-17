@@ -65,7 +65,7 @@ export class ProductosController {
     }
   }
 
-  @authenticate('jwt')
+  //@authenticate('jwt')
   @post('/productos')
   @response(200, {
     description: 'Producto model instance',
@@ -108,7 +108,7 @@ export class ProductosController {
     return this.productoRepository.count(where);
   }
 
-  @authenticate('jwt')
+  //@authenticate('jwt')
   @get('/productos')
   @response(200, {
     description: 'Array of Producto model instances by user',
